@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:padding="12dp"
         android:id="@+id/linearLayout">
 
 
