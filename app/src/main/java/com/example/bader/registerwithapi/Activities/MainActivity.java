@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -18,7 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.bader.registerwithapi.R;
-import com.example.bader.registerwithapi.Utilis_Notify_SharedPref.SharedPrefManager;
+import com.example.bader.registerwithapi.SharedPrefManager;
 import com.example.bader.registerwithapi.ApiUtilies.URLs;
 import com.example.bader.registerwithapi.JavaClasses.User;
 import com.example.bader.registerwithapi.ApiUtilies.VolleySingleton;
@@ -115,29 +114,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         progressBar.setVisibility(View.GONE);
-
                         try {
                             //converting response to json object
                             JSONObject obj = new JSONObject(response);
-
                             //if no error in response
                             if (!obj.getBoolean("error")) {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
                                 //getting the user from the response
                                 JSONObject userJson = obj.getJSONObject("user");
-
                                 //creating a new user object
                                 User user = new User(
                                         userJson.getInt("id"),
                                         userJson.getString("username"),
                                         userJson.getString("email"),
                                         userJson.getString("gender")
-                                );
-                                sendTokenToServer( userJson.getString("email"));
-                                //storing the user in shared preferences
+                                );     
+								//storing the user in shared preferences
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-
                                 //starting the profile activity
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), Profile.class));
@@ -165,50 +158,9 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
-
+/// volley requestFocus
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
     }
-    private void sendTokenToServer(String email) {
 
-        final String emil=email;
-
-        final String token = SharedPrefManager.getInstance(this).getDeviceToken();
-
-
-        if (token == null) {
-            Toast.makeText(this, "Token not generated", Toast.LENGTH_LONG).show();
-            return;
-        }
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_REGISTER_FCM,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("TOKENSAV",response.toString());
-                        try {
-                            JSONObject obj = new JSONObject(response);
-//                            Toast.makeText(Profile.this, obj.getString("message"), Toast.LENGTH_LONG).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("TOKENSAV",error.toString());
-//                        Toast.makeText(Profile.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", emil);
-                params.put("token", token);
-                return params;
-            }
-        };
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-    }
 }
