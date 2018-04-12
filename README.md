@@ -2,9 +2,11 @@
 
 ### Features 
 - Using firebase cloud messaging
-- Using volley
+- Send to Single device or brodcast to all devices .
+- Using volley .
 - Using notifcation small , big (with image) .
 - SharedPrefrences
+
 
 ### Libraries 
 ` compile 'com.google.firebase:firebase-messaging:12.0.1'`
