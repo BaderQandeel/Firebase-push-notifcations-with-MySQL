@@ -42,7 +42,7 @@ import java.util.Map;
 
 public class Profile extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
-    TextView textViewId, textViewUsername, textViewEmail, textViewGender,textViewtest;
+    TextView textViewId, textViewUsername, textViewEmail, textViewGender, textViewtest;
     private Button buttonSendPush;
     private RadioGroup radioGroup;
     private Spinner spinner;
@@ -57,6 +57,7 @@ public class Profile extends AppCompatActivity implements RadioGroup.OnCheckedCh
     }
 
     private BroadcastReceiver mRegistrationBroadcastReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,6 @@ public class Profile extends AppCompatActivity implements RadioGroup.OnCheckedCh
         String token = SharedPrefManager.getInstance(getApplicationContext()).getDeviceToken();
 
         //if token is null
-
 
 
         loadRegisteredDevices();
@@ -84,33 +84,30 @@ public class Profile extends AppCompatActivity implements RadioGroup.OnCheckedCh
         editTextImage = (EditText) findViewById(R.id.editTextImageUrl);
 
         devices = new ArrayList<>();
-textViewtest=(TextView)findViewById(R.id.texttest);
+        textViewtest = (TextView) findViewById(R.id.texttest);
         textViewId = (TextView) findViewById(R.id.textViewId);
         textViewUsername = (TextView) findViewById(R.id.textViewUsername);
         textViewEmail = (TextView) findViewById(R.id.textViewEmail);
         textViewGender = (TextView) findViewById(R.id.textViewGender);
-///EDIT UI WHEN FIREBASE RECVIED
+
+        ///EDIT UI WHEN FIREBASE RECVIED by local brodacst
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-Log.d("RECIVED_MESSAGE","q");
+                Log.d("RECIVED_MESSAGE", "q");
                 // checking for type intent filter
                 if (intent.getAction().equals("RECIVED_MESSAGE")) {
                     String message = intent.getStringExtra("title");
-                    Log.d("RECIVED_MESSAGE","qq");
+                    Log.d("RECIVED_MESSAGE", "qq");
                     Toast.makeText(context, "HHHHHHH", Toast.LENGTH_SHORT);
-
-
-
-                        buttonSendPush.setText(message);
-
+                    buttonSendPush.setText(message);
 
                 }
             }
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter("RECIVED_MESSAGE"));
-//////////////////////////////////////////////////////////////////////////
+
         buttonSendPush.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,12 +194,10 @@ Log.d("RECIVED_MESSAGE","q");
             }
         });
     }
+
     private void unRegisterFCM(String email) {
 
-        final String emil=email;
-
-
-
+        final String emil = email;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_UN_REGISTER_FCM,
                 new Response.Listener<String>() {
@@ -215,7 +210,7 @@ Log.d("RECIVED_MESSAGE","q");
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("TOKENSAV",error.toString());
+                        Log.d("TOKENSAV", error.toString());
 //                        Toast.makeText(Profile.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }) {
@@ -229,6 +224,7 @@ Log.d("RECIVED_MESSAGE","q");
         };
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
+
     private void loadRegisteredDevices() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching Devices...");
@@ -273,13 +269,15 @@ Log.d("RECIVED_MESSAGE","q");
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
     }
+
     private void sendPush() {
-        if(isSendAllChecked){
+        if (isSendAllChecked) {
             sendMultiplePush();
-        }else{
+        } else {
             sendSinglePush();
         }
     }
+
     private void sendSinglePush() {
         final String title = editTextTitle.getText().toString();
         final String message = editTextMessage.getText().toString();
@@ -314,12 +312,16 @@ Log.d("RECIVED_MESSAGE","q");
                     params.put("image", image);
 
                 params.put("email", email);
+                params.put("id1", "s");
+                params.put("id2", "ss");
+                params.put("id3", "sss");
                 return params;
             }
         };
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
+
     private void sendMultiplePush() {
         final String title = editTextTitle.getText().toString();
         final String message = editTextMessage.getText().toString();

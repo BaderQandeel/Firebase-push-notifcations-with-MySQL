@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:textAlignment="center"
             android:hint="Username"
             android:inputType="text" />
 
@@ -32,6 +33,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
+            android:textAlignment="center"
             android:hint="Password"
             android:inputType="textPassword" />
 
@@ -41,9 +43,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:background="@color/colorAccent"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
             android:text="Login" />
 
         <TextView
+            android:textSize="15sp"
             android:id="@+id/textViewRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,18 +73,21 @@
         android:id="@+id/btnToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+       android:background="@color/colorPrimaryLight"
+        android:padding="3dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="97dp"
-        android:text="Token" />
+       android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/linearLayout"
+        android:text="FCM_Token" />
 
     <TextView
         android:id="@+id/textToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout"
+        android:layout_below="@+id/btnToken"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
+
         android:text="TextView" />
 
 </RelativeLayout>

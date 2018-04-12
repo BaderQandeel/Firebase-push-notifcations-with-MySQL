@@ -17,10 +17,61 @@
         android:layout_below="@+id/linearLayout2"
         android:layout_alignParentStart="true">
 
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Email"
+                android:textSize="14sp"
+
+              />
+            <Spinner
+                android:id="@+id/spinnerDevices"
+                android:autofillHints="Select email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:hint="Enter Message Title" />
+
+        <EditText
+            android:id="@+id/editTextMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:hint="Enter Message" />
+
+        <EditText
+            android:id="@+id/editTextImageUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:hint="Enter Image URL (Optional) " />
+
+        <Button
+            android:id="@+id/buttonSendPush"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimaryLight"
+            android:textColor="@android:color/white"
+            android:text="Send Push" />
+
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <RadioButton
@@ -36,35 +87,6 @@
                 android:text="Send to One" />
 
         </RadioGroup>
-
-        <Spinner
-            android:id="@+id/spinnerDevices"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></Spinner>
-
-        <EditText
-            android:id="@+id/editTextTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Message Title" />
-
-        <EditText
-            android:id="@+id/editTextMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Message" />
-
-        <EditText
-            android:id="@+id/editTextImageUrl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Image URL (Optional) " />
-
-        <Button
-            android:id="@+id/buttonSendPush"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Send Push" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +102,8 @@
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+               >
 
 
                 <TableRow>
@@ -88,18 +111,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:text="Id"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/primary_text_light" />
 
                     <TextView
                         android:id="@+id/textViewId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="1"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/primary_text_light"/>
                 </TableRow>
 
                 <TableRow>
@@ -107,18 +133,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="5dp"
+                        android:gravity="center"
                         android:text="Username"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
+                        android:textSize="16sp"
+                        android:textColor="@android:color/primary_text_light"/>
                     <TextView
                         android:id="@+id/textViewUsername"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="probelalkhan"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="BaderQandeel"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/primary_text_light"/>
                 </TableRow>
 
                 <TableRow>
@@ -126,18 +154,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:text="Email"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                        android:gravity="center"
 
+                        android:textSize="16sp"
+                        android:textColor="@android:color/primary_text_light"/>
                     <TextView
                         android:id="@+id/textViewEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="probelalkhan@gmail.com"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
+                        android:padding="5dp"
+                        android:text="b.w.q.1995@gmail.com"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/primary_text_light"/>
                 </TableRow>
 
                 <TableRow>
@@ -145,18 +176,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:text="Gender"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@android:color/primary_text_light"/>
 
                     <TextView
                         android:id="@+id/textViewGender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:text="Male"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/primary_text_light"/>
                 </TableRow>
 
 
@@ -166,7 +200,10 @@
                 android:id="@+id/buttonLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Logout" />
+                android:text="Sign out"
+                android:layout_margin="5dp"
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"/>
         </LinearLayout>
 
 

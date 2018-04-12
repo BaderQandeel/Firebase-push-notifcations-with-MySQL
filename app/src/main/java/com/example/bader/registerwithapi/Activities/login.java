@@ -1,39 +1,40 @@
 package com.example.bader.registerwithapi.Activities;
 //test github
 
-        import android.content.Intent;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.text.TextUtils;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.EditText;
-        import android.widget.ProgressBar;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.android.volley.AuthFailureError;
-        import com.android.volley.Request;
-        import com.android.volley.Response;
-        import com.android.volley.VolleyError;
-        import com.android.volley.toolbox.StringRequest;
-        import com.example.bader.registerwithapi.R;
-        import com.example.bader.registerwithapi.Utilis_Notify_SharedPref.SharedPrefManager;
-        import com.example.bader.registerwithapi.ApiUtilies.URLs;
-        import com.example.bader.registerwithapi.JavaClasses.User;
-        import com.example.bader.registerwithapi.ApiUtilies.VolleySingleton;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.bader.registerwithapi.R;
+import com.example.bader.registerwithapi.Utilis_Notify_SharedPref.SharedPrefManager;
+import com.example.bader.registerwithapi.ApiUtilies.URLs;
+import com.example.bader.registerwithapi.JavaClasses.User;
+import com.example.bader.registerwithapi.ApiUtilies.VolleySingleton;
 
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.util.HashMap;
-        import java.util.Map;
+import java.util.HashMap;
+import java.util.Map;
 
 public class login extends AppCompatActivity {
 
     EditText editTextUsername, editTextPassword;
     ProgressBar progressBar;
-TextView textView;
+    TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,26 +44,26 @@ TextView textView;
             finish();
             startActivity(new Intent(this, Profile.class));
         }
-        textView=(TextView)findViewById(R.id.textToken) ;
+        textView = (TextView) findViewById(R.id.textToken);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 
-findViewById(R.id.btnToken).setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        String token = SharedPrefManager.getInstance(getApplicationContext()).getDeviceToken();
+        findViewById(R.id.btnToken).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String token = SharedPrefManager.getInstance(getApplicationContext()).getDeviceToken();
 
-        //if token is not null
-        if (token != null) {
-            //displaying the token
-            textView .setText(token);
-        } else {
-            //if token is null that means something wrong
-            textView.setText("Token not generated");
-        }
-    }
-});
+                //if token is not null
+                if (token != null) {
+                    //displaying the token
+                    textView.setText(token);
+                } else {
+                    //if token is null that means something wrong
+                    textView.setText("Token not generated");
+                }
+            }
+        });
         //if user presses on login
         //calling the method login
         findViewById(R.id.buttonLogin).setOnClickListener(new View.OnClickListener() {
@@ -111,7 +112,7 @@ findViewById(R.id.btnToken).setOnClickListener(new View.OnClickListener() {
                         try {
                             //converting response to json object
                             JSONObject obj = new JSONObject(response);
-                            Log.d("Volley",obj.toString());
+                            Log.d("Volley", obj.toString());
                             //if no error in response
                             if (!obj.getBoolean("error")) {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
@@ -126,7 +127,7 @@ findViewById(R.id.btnToken).setOnClickListener(new View.OnClickListener() {
                                         userJson.getString("email"),
                                         userJson.getString("gender")
                                 );
-                                updTokenToServer( userJson.getString("email"));
+                                updTokenToServer(userJson.getString("email"));
                                 //storing the user in shared preferences
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
@@ -158,9 +159,10 @@ findViewById(R.id.btnToken).setOnClickListener(new View.OnClickListener() {
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
+
     private void updTokenToServer(String email) {
 
-        final String emil=email;
+        final String emil = email;
 
         final String token = SharedPrefManager.getInstance(this).getDeviceToken();
 
@@ -180,7 +182,7 @@ findViewById(R.id.btnToken).setOnClickListener(new View.OnClickListener() {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("TOKENSAV",error.toString());
+                        Log.d("TOKENSAV", error.toString());
 //                        Toast.makeText(Profile.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }) {

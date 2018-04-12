@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity">
 
 
@@ -21,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:textAlignment="center"
             android:hint="Username"
             android:inputType="text" />
 
@@ -30,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:textAlignment="center"
             android:hint="Email"
             android:inputType="textEmailAddress" />
 
@@ -40,6 +43,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
+            android:textAlignment="center"
             android:hint="Password"
             android:inputType="textPassword" />
 
@@ -48,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:gravity="center"
             android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
@@ -73,6 +78,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:text="Register" />
 
         <TextView
@@ -80,8 +89,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:textSize="15sp"
             android:layout_marginTop="8dp"
-            android:text="Already Registered?\nLogin Here"
+            android:text="Already Registered ?\nLogin Here"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
     </LinearLayout>

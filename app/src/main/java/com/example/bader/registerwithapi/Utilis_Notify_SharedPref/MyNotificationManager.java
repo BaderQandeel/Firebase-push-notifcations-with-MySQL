@@ -1,13 +1,7 @@
 package com.example.bader.registerwithapi.Utilis_Notify_SharedPref;
 
-/**
- * Created by Bader on 2017-09-27.
- */
 
-
-
-
-        import android.app.ActivityManager;
+import android.app.ActivityManager;
         import android.app.Notification;
         import android.app.NotificationManager;
         import android.app.PendingIntent;
@@ -28,10 +22,6 @@ package com.example.bader.registerwithapi.Utilis_Notify_SharedPref;
         import java.net.URL;
         import java.util.List;
 
-
-/**
- * Created by Ravi on 31/03/15.
- */
 
 public class MyNotificationManager {
 

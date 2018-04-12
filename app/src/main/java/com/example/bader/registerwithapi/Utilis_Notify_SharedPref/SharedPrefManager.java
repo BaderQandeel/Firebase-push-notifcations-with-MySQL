@@ -1,17 +1,11 @@
 package com.example.bader.registerwithapi.Utilis_Notify_SharedPref;
 
-
-
         import android.content.Context;
         import android.content.Intent;
         import android.content.SharedPreferences;
 
         import com.example.bader.registerwithapi.Activities.login;
         import com.example.bader.registerwithapi.JavaClasses.User;
-
-/**
- * Created by Belal on 9/5/2017.
- */
 
 //here for this class we are using a singleton pattern
 
