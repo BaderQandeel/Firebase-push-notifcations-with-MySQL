@@ -1,11 +1,11 @@
 # Firebase push notifcations with MySQL
 
 ### Features 
-- Using firebase cloud messaging
+- Using firebase cloud messaging  .
 - Send to Single device or brodcast to all devices .
 - Using volley .
 - Using notifcation small , big (with image) .
-- SharedPrefrences
+- SharedPrefrences .
 
 
 ### Libraries 
