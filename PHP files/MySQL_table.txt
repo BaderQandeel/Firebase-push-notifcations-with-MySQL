@@ -1,0 +1,5 @@
+CREATE TABLE `devices` (
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `token` text NOT NULL
+);
