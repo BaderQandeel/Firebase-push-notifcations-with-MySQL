@@ -3,16 +3,19 @@ package com.example.bader.registerwithapi.Utilis_Notify_SharedPref;
 
 import android.app.ActivityManager;
         import android.app.Notification;
-        import android.app.NotificationManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
         import android.app.PendingIntent;
         import android.content.ComponentName;
         import android.content.Context;
         import android.content.Intent;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
-        import android.os.Build;
+import android.graphics.Color;
+import android.os.Build;
         import android.support.v4.app.NotificationCompat;
-        import android.text.Html;
+import android.support.v4.app.NotificationManagerCompat;
+import android.text.Html;
 
         import com.example.bader.registerwithapi.R;
 
@@ -25,18 +28,20 @@ import android.app.ActivityManager;
 
 public class MyNotificationManager {
 
-    public static final int ID_BIG_NOTIFICATION = 234;
-    public static final int ID_SMALL_NOTIFICATION = 235;
+    public static final int ID_BIG_NOTIFICATION = 200;
+    public static final int ID_SMALL_NOTIFICATION =100;
+    private static final String TAG ="My_Notification" ;
 
     private Context mCtx;
 
-    public MyNotificationManager(Context mCtx) {
+    public NotifcationManger(Context mCtx) {
         this.mCtx = mCtx;
     }
 
     //the method will show a big notification with an image
     //parameters are title for message title, message for message text, url of the big image and an intent that will open
     //when you will tap on the notification
+    NotificationCompat.BigPictureStyle bigPictureStyle;
     public void showBigNotification(String title, String message, String url, Intent intent) {
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
@@ -45,27 +50,81 @@ public class MyNotificationManager {
                         intent,
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
-        NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
+
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(TAG, "Notification Demo", NotificationManager.IMPORTANCE_LOW);
+            channel.setDescription("my notification demo");
+            mCtx.getSystemService(NotificationManager.class).createNotificationChannel(channel);
+        }
+        bigPictureStyle= new NotificationCompat.BigPictureStyle();
         bigPictureStyle.setBigContentTitle(title);
         bigPictureStyle.setSummaryText(Html.fromHtml(message).toString());
-        bigPictureStyle.bigPicture(getBitmapFromURL(url));
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mCtx);
-        Notification notification;
-        notification = mBuilder.setSmallIcon(R.mipmap.ic_launcher).setTicker(title).setWhen(0)
-                .setAutoCancel(true)
-                .setContentIntent(resultPendingIntent)
+        GlideApp.with(mCtx)
+                .asBitmap()
+                .load(url)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                        bigPictureStyle.bigPicture(resource);
+                    }
+                });
+
+
+        Notification notification = new NotificationCompat.Builder(mCtx, TAG)
                 .setContentTitle(title)
+                .setContentText( message)
+                .setAutoCancel(true)
+                .setChannelId(TAG)
+                .setSound(null)
+                .setContentIntent(resultPendingIntent)
                 .setStyle(bigPictureStyle)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.mipmap.ic_launcher))
-                .setContentText(message)
+                .setShowWhen(true)
+                .setColor(Color.GREEN)
+                .setLocalOnly(true)
                 .build();
 
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        NotificationManagerCompat.from(mCtx).notify(ID_BIG_NOTIFICATION, notification);
 
-        NotificationManager notificationManager = (NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(ID_BIG_NOTIFICATION, notification);
     }
+    //the method will show a small notification
+    //parameters are title for message title, message for message text and an intent that will open
+    //when you will tap on the notification
+    public void showSmallNotification(String title, String message, Intent intent) {
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        mCtx,
+                        ID_SMALL_NOTIFICATION,
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(TAG, "Notification Demo", NotificationManager.IMPORTANCE_LOW);
+            channel.setDescription("my notification demo");
+            mCtx.getSystemService(NotificationManager.class).createNotificationChannel(channel);
+        }
+
+        Notification notification = new NotificationCompat.Builder(mCtx, TAG)
+                .setContentTitle(title)
+                .setContentText( message)
+                .setAutoCancel(true)
+                .setChannelId(TAG)
+                .setSound(null)
+                .setContentIntent(resultPendingIntent)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.mipmap.ic_launcher))
+                .setShowWhen(true)
+                .setColor(Color.GREEN)
+                .setLocalOnly(true)
+                .build();
+
+        NotificationManagerCompat.from(mCtx).notify(ID_SMALL_NOTIFICATION, notification);
+    }
+
     public static boolean isAppIsInBackground(Context context) {
         boolean isInBackground = true;
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -90,49 +149,7 @@ public class MyNotificationManager {
 
         return isInBackground;
     }
-    //the method will show a small notification
-    //parameters are title for message title, message for message text and an intent that will open
-    //when you will tap on the notification
-    public void showSmallNotification(String title, String message, Intent intent) {
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        mCtx,
-                        ID_SMALL_NOTIFICATION,
-                        intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
 
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mCtx);
-        Notification notification;
-        notification = mBuilder.setSmallIcon(R.mipmap.ic_launcher).setTicker(title).setWhen(0)
-                .setAutoCancel(true)
-                .setContentIntent(resultPendingIntent)
-                .setContentTitle(title)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.mipmap.ic_launcher))
-                .setContentText(message)
-                .build();
 
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
-
-        NotificationManager notificationManager = (NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(ID_SMALL_NOTIFICATION, notification);
-    }
-
-    //The method will return Bitmap from an image URL
-    private Bitmap getBitmapFromURL(String strURL) {
-        try {
-            URL url = new URL(strURL);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }
