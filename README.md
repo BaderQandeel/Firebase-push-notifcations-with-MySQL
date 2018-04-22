@@ -5,6 +5,7 @@
 - Send to Single device or brodcast to all devices .
 - Support Android O notifcations.
 - Using Glide to load images.
+- Update UI on push notiftaction using LocalBroadCast .
 - Using volley .
 - Using notifcation small , big (with image) .
 - SharedPrefrences .
