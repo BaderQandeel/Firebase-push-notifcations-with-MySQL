@@ -12,8 +12,11 @@
 
 ### Libraries 
 ` compile 'com.google.firebase:firebase-messaging:12.0.1'`
+
 ` compile 'com.android.volley:volley:1.0.0'`
+
 ` implementation 'com.github.bumptech.glide:glide:4.7.1'`
+
 `  annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1' `
 
 ## Getting Start
