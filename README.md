@@ -3,6 +3,8 @@
 ### Features 
 - Using firebase cloud messaging  .
 - Send to Single device or brodcast to all devices .
+- Support Android O notifcations.
+- Using Glide to load images.
 - Using volley .
 - Using notifcation small , big (with image) .
 - SharedPrefrences .
@@ -10,8 +12,9 @@
 
 ### Libraries 
 ` compile 'com.google.firebase:firebase-messaging:12.0.1'`
-
 ` compile 'com.android.volley:volley:1.0.0'`
+` implementation 'com.github.bumptech.glide:glide:4.7.1'`
+`  annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1' `
 
 ## Getting Start
 
@@ -20,6 +23,7 @@
 3. Create MySQL database .
 4. Move Php files to your server.
 5. Change config.php according to your database and put your firebase Api key.
+6. Rebulid project to Use GlideApp.
 
 ### Preview
 
